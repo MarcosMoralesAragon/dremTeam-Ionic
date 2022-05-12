@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      League list
+      <span class="icon-bar">
+        <!-- Añadir el router back -->
+        <ion-icon slot="end" name="log-out-outline"></ion-icon>
+      </span>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  [fullscreen]="true" mode="ios">
+  <h4 class="ion-text-center">Welcome Username</h4>
+  <ion-card>
+    <ion-item class="text-and-button">
+      <ion-label class="ion-text-center">Mis ligas</ion-label>
+      <ion-icon slot="end" name="add" (click)="whatToDisplay('own')"></ion-icon>
+    </ion-item>
+    <div class="carrousel">
+      <!-- <ion-slides mode="ios">
+        <ng-container *ngFor="let examen of examenes">
+          <ion-slide>
+            <ion-card-header>
+              <ion-card-subtitle>{{nombreAsignatura(examen.idAsignatura)}}</ion-card-subtitle>
+              <ion-card-title>{{examen.nombre}}</ion-card-title>
+            </ion-card-header>
+          </ion-slide>
+        </ng-container>
+      </ion-slides> -->
+    </div>
+  </ion-card>
+
+  <ion-card>
+    <ion-item class="text-and-button">
+      <ion-label class="ion-text-center">Espectador</ion-label>
+      <ion-icon slot="end" name="add" (click)="whatToDisplay('espectate')"></ion-icon>
+    </ion-item>
+    <div class="carrousel">
+      <!-- <ion-slides mode="ios">
+        <ng-container *ngFor="let examen of examenes">
+          <ion-slide>
+            <ion-card-header>
+              <ion-card-subtitle>{{nombreAsignatura(examen.idAsignatura)}}</ion-card-subtitle>
+              <ion-card-title>{{examen.nombre}}</ion-card-title>
+            </ion-card-header>
+          </ion-slide>
+        </ng-container>
+      </ion-slides> -->
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="whatToAdd">
+    <ng-container *ngIf="whatToAdd == 'own'">
+      <ion-item class="text-and-button">
+        <ion-label class="ion-text-center">Crear liga</ion-label>
+        <ion-icon slot="end" name="add"></ion-icon>
+      </ion-item>
+      <div>
+        
+      </div>
+    </ng-container>
+    <ng-container *ngIf="whatToAdd == 'espectate'">
+      <ion-item class="text-and-button">
+        <ion-label class="ion-text-center">Añadir liga</ion-label>
+        <ion-icon slot="end" name="add"></ion-icon>
+      </ion-item>
+      <div>
+        
+      </div>
+    </ng-container>
+  </ion-card>
+
+</ion-content>

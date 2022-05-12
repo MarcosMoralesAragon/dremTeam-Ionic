@@ -30,29 +30,33 @@ export class HomePage {
       // Snackbar all good
       this.acction = "Log in"
     } else if(request == "Log in") {
-      if(!this.login()){
+      var user = this.login()
+      if(!user){
         // Snackbar error using error variable
         return
       }
-      this.router.navigateByUrl('')
+      console.log("a")
+      this.router.navigateByUrl('user/$result')
     }
   }
 
-  register() : boolean{
+  register(): boolean{
     if(!this.checkData(this.userRegister, this.acction)){
       // Fill error message
       return false;
     }
+    
     // Firebase request
     return true;
   }
 
-  login() : boolean{
+  login() {
     if(!this.checkData(this.userLogin, this.acction)){
-      return false;
+      return ;
     }
+    var result = 1
     // Firebase request
-    return true;
+    return result;
   }
 
   checkData(typeOfJson, acction) : boolean{
