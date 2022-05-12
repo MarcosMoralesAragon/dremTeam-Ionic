@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dream-team-c9ca7": {
+      "hosting": {
+        "app": [
+          "dream-team-c9ca7"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "dream-team-c9ca7"
+  }
+}
