@@ -1,0 +1,79 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      League list
+      <span class="icon-bar">
+        <!-- Añadir el router back -->
+        <ion-icon slot="end" name="log-out-outline"></ion-icon>
+      </span>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  [fullscreen]="true" mode="md">
+  <h4 class="ion-text-center">Bienvenido Username</h4>
+  <ion-card mode="ios">
+    <ion-item class="text-and-button">
+      <ion-label class="ion-text-center">Mis ligas</ion-label>
+      <ion-icon slot="end" name="add" (click)="whatToDisplay('own')"></ion-icon>
+    </ion-item>
+    <div class="carrousel">
+      <ion-slides mode="ios">
+        <ng-container *ngFor="let league of ownLeagues">
+          <ion-slide>
+            <ion-card-header>
+              <ion-card-subtitle>{{league.id}}</ion-card-subtitle>
+              <ion-card-title>{{league.name}}</ion-card-title>
+              <ion-card-subtitle>{{getPosition(league.id , "ownLeagues")}} - {{ownLeagues.length}}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-slide>
+        </ng-container>
+      </ion-slides>
+    </div>
+  </ion-card>
+
+  <ion-card mode="ios">
+    <ion-item class="text-and-button">
+      <ion-label class="ion-text-center">Espectador</ion-label>
+      <ion-icon slot="end" name="add" (click)="whatToDisplay('espectate')"></ion-icon>
+    </ion-item>
+    <div class="carrousel">
+      <ion-slides mode="ios">
+        <ng-container *ngFor="let league of espectatingLeagues">
+          <ion-slide>
+            <ion-card-header>
+              <ion-card-subtitle>{{league.id}}</ion-card-subtitle>
+              <ion-card-title>{{league.name}}</ion-card-title>
+              <ion-card-subtitle>{{getPosition(league.id , "espectatingLeagues")}} - {{espectatingLeagues.length}}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-slide>
+        </ng-container>
+      </ion-slides>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="whatToAdd" mode="ios">
+    <ng-container *ngIf="whatToAdd == 'own'">
+      <ion-item class="text-and-button">
+        <ion-label class="ion-text-center">Crear liga</ion-label>
+        <ion-icon slot="end" name="add" (click)="create()"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Código de la liga :</ion-label>
+        <ion-input type="text" placeholder="XQC" [(ngModel)] = "creating.code" ></ion-input>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="whatToAdd == 'espectate'">
+      <ion-item class="text-and-button">
+        <ion-label class="ion-text-center">Añadir liga</ion-label>
+        <ion-icon slot="end" name="add" (click)="create()"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Nombre de la liga :</ion-label>
+        <ion-input type="text" placeholder="Liga1" [(ngModel)] = "creating.name" ></ion-input>
+      </ion-item>
+    </ng-container>
+  </ion-card>
+
+</ion-content>
