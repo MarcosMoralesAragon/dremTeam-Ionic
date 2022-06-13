@@ -23,7 +23,7 @@ export class HomePage {
     this.acction = acction
   }
 
-  request(request : string){
+  async doAcction(request : string){
     if(request == "Register"){
       if(!this.checkData(this.userRegister, this.acction)){
         // Fill error message
@@ -35,22 +35,22 @@ export class HomePage {
           console.log("Algo salio mal")
           return ;
         }
-          console.log("Lo pillo")
           this.acction = "Log in"
       })
+      this.loginRegisterService.addUserDatabase(this.userRegister)
     } else if(request == "Log in") {
       if(!this.checkData(this.userLogin, this.acction)){
         return ;
       }
       this.loginRegisterService.logInUser(this.userLogin).subscribe(value => {
         console.log(value)
+        this.loginRegisterService.setUserData()
+        this.router.navigateByUrl('user/1')
         if(!value){
           console.log("Algo salio mal")
           return ;
         }
-        console.log(this.autentication.currentUser)
       })
-      this.router.navigateByUrl('user/1')
     }
   }
 

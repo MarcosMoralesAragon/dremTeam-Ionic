@@ -18,6 +18,11 @@
       <ion-label class="ion-text-center">Mis ligas</ion-label>
       <ion-icon slot="end" name="add" (click)="whatToDisplay('own')"></ion-icon>
     </ion-item>
+    <div *ngIf="!ownLeagues">
+      <ion-card>
+        <ion-card-subtitle class="ion-text-center">Create one now!</ion-card-subtitle>
+      </ion-card>
+    </div>
     <div class="carrousel">
       <ion-slides mode="ios">
         <ng-container *ngFor="let league of ownLeagues">
@@ -38,6 +43,11 @@
       <ion-label class="ion-text-center">Espectador</ion-label>
       <ion-icon slot="end" name="add" (click)="whatToDisplay('espectate')"></ion-icon>
     </ion-item>
+    <div *ngIf="!espectatingLeagues">
+      <ion-card>
+        <ion-card-subtitle class="ion-text-center">Join one now!</ion-card-subtitle>
+      </ion-card>
+    </div>
     <div class="carrousel">
       <ion-slides mode="ios">
         <ng-container *ngFor="let league of espectatingLeagues">
@@ -54,9 +64,10 @@
   </ion-card>
 
   <ion-card *ngIf="whatToAdd" mode="ios">
-    <ng-container *ngIf="whatToAdd == 'own'">
+    <ng-container *ngIf="whatToAdd == 'espectate'">
       <ion-item class="text-and-button">
-        <ion-label class="ion-text-center">Crear liga</ion-label>
+        <ion-icon slot="start" name="remove-outline" (click)="cancel()"></ion-icon>
+        <ion-label class="ion-text-center">Añadir liga</ion-label>
         <ion-icon slot="end" name="add" (click)="create()"></ion-icon>
       </ion-item>
       <ion-item>
@@ -64,9 +75,10 @@
         <ion-input type="text" placeholder="XQC" [(ngModel)] = "creating.code" ></ion-input>
       </ion-item>
     </ng-container>
-    <ng-container *ngIf="whatToAdd == 'espectate'">
+    <ng-container *ngIf="whatToAdd == 'own'">
       <ion-item class="text-and-button">
-        <ion-label class="ion-text-center">Añadir liga</ion-label>
+        <ion-icon slot="start" name="remove-outline" (click)="cancel()"></ion-icon>
+        <ion-label class="ion-text-center">Crear liga</ion-label>
         <ion-icon slot="end" name="add" (click)="create()"></ion-icon>
       </ion-item>
       <ion-item>

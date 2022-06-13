@@ -36,12 +36,12 @@
           </ion-item>
           <ion-item>
             <ion-label>Password</ion-label>
-            <ion-input type="password" placeholder="1234" [(ngModel)] = "userRegister.password" ></ion-input>
+            <ion-input type="password" placeholder="123456" [(ngModel)] = "userRegister.password" ></ion-input>
           </ion-item>
         </ng-container>
       </ion-card>
       <div class="button-down">
-        <ion-button (click)="request(acction)"  shape="round" class="button">
+        <ion-button (click)="doAcction(acction)"  shape="round" class="button">
           {{acction}}
         </ion-button>
       </div>
