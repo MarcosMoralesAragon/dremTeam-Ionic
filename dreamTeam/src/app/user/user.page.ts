@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { League } from '../model/league';
+import { LogInRegisterService } from '../service/auth/log-in-register.service';
+import { LeagueService } from '../service/league/league.service';
 
 @Component({
   selector: 'app-user',
@@ -10,30 +12,14 @@ export class UserPage implements OnInit {
 
   whatToAdd = undefined
   creating = {name: "", code:""}
-  ownLeagues : League[] = [
-    {"name" : "Prueba 1", "id": "AAABBB123"},
-    {"name" : "Prueba 2", "id": "AAABBB124"},
-    {"name" : "Prueba 3", "id": "AAABBB125"},
-    {"name" : "Prueba 4", "id": "AAABBB126"},
-    {"name" : "Prueba 5", "id": "AAABBB127"},
-    {"name" : "Prueba 6", "id": "AAABBB128"},
-    {"name" : "Prueba 7", "id": "AAABBB129"},
-  ]
+  ownLeagues : League[] = []
+  espectatingLeagues : League[] = []
 
-  espectatingLeagues : League[] = [
-    {"name" : "Prueba 1", "id": "AAABBB123"},
-    {"name" : "Prueba 2", "id": "AAABBB124"},
-    {"name" : "Prueba 3", "id": "AAABBB125"},
-    {"name" : "Prueba 4", "id": "AAABBB126"},
-    {"name" : "Prueba 5", "id": "AAABBB127"},
-    {"name" : "Prueba 6", "id": "AAABBB128"},
-    {"name" : "Prueba 7", "id": "AAABBB129"},
-  ]
-
-  liga : League
-  constructor() {}
+  constructor(private leagueService : LeagueService) {}
 
   ngOnInit() {
+    this.leagueService.getLeagues("ownLeague").subscribe(result => this.ownLeagues = result)
+    this.leagueService.getLeagues("espectatingLeagues").subscribe(result => this.espectatingLeagues = result)
   }
 
   whatToDisplay(acction : string){
@@ -56,6 +42,10 @@ export class UserPage implements OnInit {
       // Snackbar success
       this.whatToAdd = undefined
     }
+  }
+
+  cancel(){
+    this.whatToAdd = undefined
   }
 
   checkData(data : string) : boolean{
