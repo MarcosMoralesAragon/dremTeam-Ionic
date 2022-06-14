@@ -45,7 +45,7 @@ export class HomePage {
       this.loginRegisterService.logInUser(this.userLogin).subscribe(value => {
         console.log(value)
         this.loginRegisterService.setUserData()
-        this.router.navigateByUrl('user/1')
+        this.router.navigateByUrl('user')
         if(!value){
           console.log("Algo salio mal")
           return ;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { League } from '../model/league';
 import { LogInRegisterService } from '../service/auth/log-in-register.service';
 import { LeagueService } from '../service/league/league.service';
@@ -15,7 +16,8 @@ export class UserPage implements OnInit {
   ownLeagues : League[] = []
   espectatingLeagues : League[] = []
 
-  constructor(private leagueService : LeagueService) {}
+  constructor(private leagueService : LeagueService,
+              private router : Router) {}
 
   ngOnInit() {
     this.leagueService.getLeagues("ownLeague").subscribe(result => this.ownLeagues = result)
@@ -62,5 +64,10 @@ export class UserPage implements OnInit {
     if(list == "espectatingLeagues"){
       return this.espectatingLeagues.findIndex(league => league.id == idLeague) + 1 
     }
+  }
+
+  goToLeague(userStatus: String, league:League){
+    // TODO
+    this.router.navigateByUrl(this.router.url + '/owner')
   }
 }
