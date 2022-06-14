@@ -10,6 +10,10 @@ const routes: Routes = [
   },  {
     path: 'owner',
     loadChildren: () => import('./owner/owner.module').then( m => m.OwnerPageModule)
+  },
+  {
+    path: 'espectator',
+    loadChildren: () => import('./espectator/espectator.module').then( m => m.EspectatorPageModule)
   }
 
 ];

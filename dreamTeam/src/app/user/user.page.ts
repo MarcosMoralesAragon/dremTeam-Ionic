@@ -67,7 +67,14 @@ export class UserPage implements OnInit {
   }
 
   goToLeague(userStatus: String, league:League){
-    // TODO
-    this.router.navigateByUrl(this.router.url + '/owner')
+    var navigate = "/owner"
+    if(userStatus == "espectator"){
+      navigate = "/espectator"
+    }
+    this.router.navigateByUrl(this.router.url + navigate)
+  }
+
+  navigateBack(){
+    this.router.navigateByUrl('/')
   }
 }
