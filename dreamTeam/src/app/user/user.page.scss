@@ -8,3 +8,15 @@ ion-icon{
 ::-webkit-scrollbar{
     display: none;
 }
+.header{
+    margin-top: 2vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+.icon{
+    font-size: 1.5rem;
+}
