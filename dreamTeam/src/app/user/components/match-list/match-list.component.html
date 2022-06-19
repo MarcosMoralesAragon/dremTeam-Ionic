@@ -1,0 +1,90 @@
+<div class="container">
+  <ion-card class="resume">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Ultimos partidos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-slides mode="ios" scrollbar="ios">
+        <ion-slide>
+          <div class="card" id="last-match">
+            <span id="mvp">MVP : Pepe (9.2)</span>
+            <span id="defensa">Defensa ★ : Pepe (8)</span>
+            <span id="delantero">Delantero ★ : Pepe (7)</span>
+            <span id="centro">Centro ★ : Pepe (8)</span>
+            <span id="resultado">0 - 0</span>
+            <span id="code">M-AAABBBCC</span>
+            <div id="button">
+              <ion-button class="button-text" mode="ios">
+                Go
+              </ion-button>
+            </div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="card" id="last-match">
+            <span id="mvp">MVP : Pepe (9.2)</span>
+            <span id="defensa">Defensa ★ : Pepe (8)</span>
+            <span id="delantero">Delantero ★ : Pepe (7)</span>
+            <span id="centro">Centro ★ : Pepe (8)</span>
+            <span id="resultado">0 - 0</span>
+            <span id="code">M-AAABBBCC</span>
+            <div id="button">
+              <ion-button class="button-text" mode="ios">
+                Go
+              </ion-button>
+            </div>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
+  <div class="card-search">
+    <div class="match-searcher">
+      <ion-label class="input-search-label" id="first-label">M-</ion-label>
+      <ion-input class="input-search" placeholder="Codigo de la liga"></ion-input>
+      <ion-label class="input-search-label" id="second-label"><ion-icon name="search"></ion-icon></ion-label>
+    </div>
+  </div>
+  <!-- Ng If -->
+  <div class="card" id="game-card">
+    <ion-card-title class="ion-text-center black-text">Partido M-AAABBBCCC</ion-card-title>
+    <div class="horizontal-divider"></div>
+    <ion-slides [options]="teamsSlidesOptions" class="slide">
+        <ion-slide *ngFor="let item of testData">
+          <ion-chip class="data-display__chip">
+            <ion-label>{{item}}</ion-label>
+          </ion-chip>
+        </ion-slide>
+    </ion-slides>
+    <div class="VS-game-card">
+      <div class="horizontal-divider"></div>
+      <div id="vs">
+        <span >VS</span>
+      </div>
+      <div class="horizontal-divider"></div>
+    </div>
+    <ion-slides [options]="teamsSlidesOptions" class="slide">
+      <ion-slide *ngFor="let item of testData">
+        <ion-chip class="data-display__chip">
+          <ion-label>{{item}}</ion-label>
+        </ion-chip>
+      </ion-slide>
+    </ion-slides>
+    <div class="horizontal-divider"></div>
+    <div class="game-card-performance">
+      <span id="player-name" class="player-data">
+        Nombre
+      </span>
+      <span class="player-data">Media : 9.2</span>
+      <span class="player-data">Defensa : 8</span>
+      <span class="player-data">Delantero : 7</span>
+      <span class="player-data">Centro : 8</span>
+      <span class="player-data">Goles : 0</span>
+      <div id="player-button">
+        <ion-button class="button-text" mode="ios">
+          See more
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</div>

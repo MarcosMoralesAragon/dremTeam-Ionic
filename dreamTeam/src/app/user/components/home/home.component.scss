@@ -1,0 +1,121 @@
+.container{
+    background: rgb(108,172,49);
+    background: linear-gradient(90deg, rgba(108,172,49,1) 0%, rgba(211,211,211,1) 25%, rgba(211,211,211,1) 50%, rgba(211,211,211,1) 75%, rgba(108,172,49,1) 100%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    margin-top: 2vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    color: rgb(17, 17, 17)
+}
+.icon{
+    font-size: 1.5rem;
+}
+.card{
+    display: grid;
+    grid-template-columns: 1fr 0.6fr;
+    grid-template-rows: repeat(4, 1fr);
+    justify-content: center;
+    align-items: center;
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    color: rgb(31, 31, 31);
+    padding: 7px;
+    border: 1px gray solid;
+    box-shadow: 2px 2px 10px rgb(0, 0, 0);
+}
+#mvp{
+    grid-column: 1;
+    grid-row: 1;
+}
+#delantero{
+    grid-column: 1;
+    grid-row: 2;
+}
+#defensa{
+    grid-column: 1;
+    grid-row: 3;
+}
+#centro{
+    grid-column: 1;
+    grid-row: 4;
+}
+#resultado{
+    grid-column: 2;
+    grid-row: 2/4;
+    font-size: 1.5rem;
+    text-align: center;
+}
+#button{
+    grid-column: 2;
+    grid-row: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button-text{
+    height: 20px;
+}
+.resultado-text{
+    text-align: center;
+    margin-top: 7px;
+    color: rgb(211, 211, 211);
+    text-shadow: 2px 2px 10px rgb(0, 0, 0);
+}
+.league-state{
+    margin-top: 20px;
+}
+.league-state__data-display{
+    display: grid;
+    grid-template-rows: repeat(3,1fr);
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(211, 211, 211);
+    border-radius: 10px;
+    color: rgb(31, 31, 31);
+    padding: 7px;
+    border: 1px gray solid;
+    box-shadow: 2px 2px 10px rgb(0, 0, 0);
+}
+.data-display__header{
+    grid-row: 1;
+    grid-column: 1/4;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.data-display__firstchip{
+    grid-row: 2;
+    grid-column: 1/3;
+}
+.data-display__secondchip{
+    grid-row: 3;
+    grid-column: 1;
+}
+.data-display__thirdchip{
+    grid-row: 3;
+    grid-column: 2;
+}
+.data-display__chip{
+    color: rgb(211, 211, 211);
+    background-color: rgb(31, 31, 31);
+    justify-content: center;
+    align-items: center;
+}
+#delanteros-header{
+    font-size: 1.1rem;
+}
+.end{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
