@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { League } from '../model/league';
+import { User } from '../model/user';
 import { LogInRegisterService } from '../service/auth/log-in-register.service';
 import { LeagueService } from '../service/league/league.service';
 
@@ -11,17 +12,32 @@ import { LeagueService } from '../service/league/league.service';
 })
 export class UserPage implements OnInit {
 
+  user: User
   whatToAdd = undefined
   creating = {name: "", code:""}
-  ownLeagues : League[] = []
-  espectatingLeagues : League[] = []
+  ownLeagues : League[]
+  spectatingLeagues : League[]
+  name: string
 
   constructor(private leagueService : LeagueService,
-              private router : Router) {}
+              private router : Router,
+              public logInRegisterService : LogInRegisterService) {
+                this.logInRegisterService.getUserData().subscribe(result => {
+                  this.user = result 
+                  console.log(this.user)
+                  this.leagueService.getLeagues(this.user).subscribe((result:any) =>{
+                    console.log(result)
+                    this.ownLeagues = result.ownLeagues
+                    this.spectatingLeagues = result.spectatingLeagues
+                    console.log(this.spectatingLeagues)
+                  })
+                })
+              }
 
   ngOnInit() {
-    this.leagueService.getLeagues("ownLeague").subscribe(result => this.ownLeagues = result)
-    this.leagueService.getLeagues("espectatingLeagues").subscribe(result => this.espectatingLeagues = result)
+    this.refreshUser()
+    // this.leagueService.getLeagues("ownLeague").subscribe(result => this.ownLeagues = result)
+    // this.leagueService.getLeagues("espectatingLeagues").subscribe(result => this.espectatingLeagues = result)
   }
 
   whatToDisplay(acction : string){
@@ -33,16 +49,23 @@ export class UserPage implements OnInit {
       if(!this.checkData(this.creating.name)){
         // Snackbar error
       }
-      // Add it to user via firebase
+      this.leagueService.createLeague({name: this.creating.name, id : this.user.id}).subscribe(result => {
+        this.whatToAdd = undefined
+        this.refreshUser()
+      })
       // Snackbar success
-      this.whatToAdd = undefined
     } else if(this.whatToAdd == "espectate"){
       if(!this.checkData(this.creating.code)){
         // Snackbar error
       }
-      // Add it to user via firebase
-      // Snackbar success
-      this.whatToAdd = undefined
+      this.leagueService.spectateLeague({id: this.creating.code, userId : this.user.id}).subscribe(result => {
+        if(result == ""){
+          // Snackbar league not found
+          return;
+        }
+        this.whatToAdd = undefined
+        this.refreshUser()
+      })
     }
   }
 
@@ -62,7 +85,7 @@ export class UserPage implements OnInit {
       return this.ownLeagues.findIndex(league => league.id == idLeague) + 1
     }
     if(list == "espectatingLeagues"){
-      return this.espectatingLeagues.findIndex(league => league.id == idLeague) + 1 
+      return this.spectatingLeagues.findIndex(league => league.id == idLeague) + 1 
     }
   }
 
@@ -71,10 +94,21 @@ export class UserPage implements OnInit {
     if(userStatus == "espectator"){
       navigate = "/espectator"
     }
+    this.leagueService.leagueIn = league
     this.router.navigateByUrl(this.router.url + navigate)
   }
 
   navigateBack(){
     this.router.navigateByUrl('/')
+  }
+
+  refreshUser(){
+    this.logInRegisterService.getUserData().subscribe(result => {
+      this.user = result 
+      this.leagueService.getLeagues(this.user).subscribe((result:any) =>{
+        this.ownLeagues = result.ownLeagues
+        this.spectatingLeagues = result.spectatingLeagues
+      })
+    })
   }
 }

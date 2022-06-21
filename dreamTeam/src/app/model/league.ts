@@ -1,5 +1,9 @@
+import { BestPlayers } from "./bestPlayers"
+
 export interface League {
     name: string,
     id: string,
-    ownerEmail: string
+    playersId?: string[],
+    matchesId?: string[],
+    bestOfTheLeague?: BestPlayers 
 }

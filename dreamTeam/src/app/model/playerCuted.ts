@@ -1,5 +1,5 @@
 export interface PlayerCuted {
     id: string,
-    nombre: string,
-    dato: number
+    name: string,
+    data: number
 }

@@ -1,13 +1,13 @@
 import { Participation } from "./participation";
-import { PlayerCuted } from "./player-cuted";
+import { PlayerCuted } from "./playerCuted";
 
 export interface Match {
     id: string,
     team1: Participation[],
     team2: Participation[],
-    result: string,
-    mvp: PlayerCuted,
-    delantero: PlayerCuted,
-    centro: PlayerCuted,
-    defensa: PlayerCuted
+    result?: string,
+    mvp?: PlayerCuted,
+    shooter?: PlayerCuted,
+    center?: PlayerCuted,
+    defense?: PlayerCuted
 }

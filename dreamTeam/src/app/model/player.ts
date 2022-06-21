@@ -1,10 +1,10 @@
 export interface Player {
     id: string,
-    nombre: string,
-    matches: string[],
-    goles: number[],
-    media: number[],
-    delantero: number[],
-    centro: number[],
-    defensa: number[]
+    name: string,
+    matches?: string[],
+    goals?: number[],
+    medium?: number[],
+    shooter?: number[],
+    center?: number[],
+    defense?: number[]
 }

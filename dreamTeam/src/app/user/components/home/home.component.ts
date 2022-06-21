@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LeagueService } from 'src/app/service/league/league.service';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +15,11 @@ export class HomeComponent implements OnInit {
     spaceBetween: 10
   }
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, private leagueService : LeagueService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.leagueService.refreshLeagueIn(this.leagueService.leagueIn.id).subscribe((result: any) => this.leagueService.leagueIn = result)
+  }
 
   navigateBack(){
     this.router.navigateByUrl("/user")

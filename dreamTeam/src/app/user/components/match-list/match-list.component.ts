@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LeagueService } from 'src/app/service/league/league.service';
 
 @Component({
   selector: 'app-match-list',
@@ -22,9 +23,12 @@ teamsSlidesOptions = {
   spaceBetween: 10
 }
 
-  constructor() { }
+  constructor(public leagueService : LeagueService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.leagueService.refreshLeagueIn(this.leagueService.leagueIn.id).subscribe((result: any) => this.leagueService.leagueIn = result)
+
+  }
 
   test(){
     console.log("hola")

@@ -1,3 +1,63 @@
 <div class="container">
-  
+    <div class="selector">
+        <ion-segment color="warning" value="player" (ionChange)="segmentChanged($event)" mode="ios" >
+            <ion-segment-button value="player">
+              <ion-label>Jugador</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="match">
+              <ion-label>Partido</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+    </div>
+    <ng-container *ngIf="whatToMake == 'player'">
+        <div class="card">
+            <ion-card-title class="ion-text-center black-color header">Nuevo jugador</ion-card-title>
+            <div class="input-container" id="top-input">
+                <ion-label class="color-white">Nombre</ion-label>
+                <ion-input placeholder="Pablo" class="input" [(ngModel)]="newPlayer.name"></ion-input>
+            </div>
+            <div class="input-container" >
+                <ion-label class="color-white">Delantero</ion-label>
+                <ion-select placeholder="5" mode="ios" [(ngModel)]="newPlayer.shooting">
+                    <ng-container *ngFor="let number of numbers">
+                        <ion-select-option value="{{number}}">{{number}}</ion-select-option>
+                    </ng-container>
+                </ion-select>
+            </div>
+            <div class="input-container" >
+                <ion-label class="color-white">Centro</ion-label>
+                <ion-select placeholder="5" mode="ios" [(ngModel)]="newPlayer.center">
+                    <ng-container *ngFor="let number of numbers">
+                        <ion-select-option value="{{number}}">{{number}}</ion-select-option>
+                    </ng-container>
+                </ion-select>
+            </div>
+            <div class="input-container" id="botton-input">
+                <ion-label class="color-white">Defensa</ion-label>
+                <ion-select placeholder="5" mode="ios" [(ngModel)]="newPlayer.defense">
+                    <ng-container *ngFor="let number of numbers">
+                        <ion-select-option value="{{number}}">{{number}}</ion-select-option>
+                    </ng-container>
+                </ion-select>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="whatToMake == 'match'">
+        <div class="card">
+            <ion-card-title class="ion-text-center black-color">Nuevo partido</ion-card-title>
+            <div class="input-container" >
+                <ion-label class="color-white">Centro</ion-label>
+                <ion-select placeholder="5" mode="ios" [(ngModel)]="playersInMatch" multiple="true">
+                    <ng-container *ngFor="let player of players">
+                        <ion-select-option value="{{player.id}}">{{player.name}}</ion-select-option>
+                    </ng-container>
+                </ion-select>
+            </div>
+        </div>
+    </ng-container>
+    <div class="card">
+        <ion-button (click)="create()" mode="ios" expand="block">
+            Crear
+        </ion-button>
+    </div>
 </div>

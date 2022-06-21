@@ -4,88 +4,78 @@
             <span id="matchs">Jugadores</span>
         </div>
         <div class="horizontal-divider"></div>
-        <ion-slides [options]="playersSlidesOptions">
-            <ion-slide>
-                <ion-chip class="data-display__chip">
-                    <ion-label>Jesus</ion-label>
-                </ion-chip>
-            </ion-slide>
-            <ion-slide>
-                <ion-chip class="data-display__chip">
-                    <ion-label>Pablo</ion-label>
-                </ion-chip>
-            </ion-slide>
-            <ion-slide>
-                <ion-chip class="data-display__chip">
-                    <ion-label>Alvaro</ion-label>
-                </ion-chip>
-            </ion-slide>
-            <ion-slide>
-                <ion-chip class="data-display__chip">
-                    <ion-label>Antonio</ion-label>
-                </ion-chip>
-            </ion-slide>
-            <ion-slide>
-                <ion-chip class="data-display__chip">
-                    <ion-label>Olga</ion-label>
-                </ion-chip>
-            </ion-slide>
-        </ion-slides>
+        <ng-container *ngIf="players">
+            <ion-slides [options]="playersSlidesOptions">
+                <ng-container *ngFor="let player of players">
+                    <ion-slide>
+                        <ion-chip class="data-display__chip" (click)="seePLayer(player)">
+                            <ion-label>{{player.name}}</ion-label>
+                        </ion-chip>
+                    </ion-slide>
+                </ng-container>
+            </ion-slides>
+        </ng-container>
     </div>
     <div class="card" id="data-player">
-        <div class="list-of-matches_text">
-            <span id="matchs">Nombre</span>
-        </div>
-        <div class="performance-medium">
-            <span class="performance-span" id="goles-medium">Goles : 22</span>
-            <span class="performance-span">Media : 5.6</span>
-            <span class="performance-span">Delantero : 4.3</span>
-            <span class="performance-span">Centro : 5.8</span>
-            <span class="performance-span">Defensa : 9.2</span>
-            <div class="horizontal-divider"></div>
-            <div class="horizontal-divider"></div>
-        </div>
-        <div class="list-of-matches">
-            <div class="list-of-matches_text">
-                <span id="matchs">Partidos</span>
-            </div>
-            <ion-slides [options]="teamsSlidesOptions" class="slide">
-                <ion-slide *ngFor="let item of testData">
-                    <ion-chip class="data-display__chip">
-                        <ion-label>{{item}}</ion-label>
-                    </ion-chip>
-                </ion-slide>
-            </ion-slides>
-        </div>
+        <span id="performace-header">Performance</span>
         <div class="horizontal-divider"></div>
-            <ion-segment (ionChange)="segmentChanged($event)" scrolleable value="media" mode="ios" >
-                <ion-segment-button value="Media">
-                    <ion-icon name="star-outline"></ion-icon>
-                </ion-segment-button>
-                <ion-segment-button value="Delantero">
-                    <div class="icon-flex">
-                        <ion-icon class="icon-in-flex" name="caret-back-outline"></ion-icon>
-                        <ion-icon class="icon-in-flex"name="man-outline"></ion-icon>
-                    </div>
-                </ion-segment-button>
-                <ion-segment-button value="Centro">
-                    <div class="icon-flex">
-                        <ion-icon class="icon-in-flex" name="caret-forward-outline"></ion-icon>
-                        <ion-icon class="icon-in-flex" name="man-outline"></ion-icon>
-                        <ion-icon class="icon-in-flex" name="caret-back-outline"></ion-icon>
-                    </div>
-                </ion-segment-button>
-                <ion-segment-button value="Defensa">
-                    <div class="icon-flex">
-                        <ion-icon class="icon-in-flex"name="man-outline"></ion-icon>
-                        <ion-icon class="icon-in-flex" name="caret-forward-outline"></ion-icon>
-                    </div>
-                </ion-segment-button>
-            </ion-segment>
-        <canvas baseChart width="400" height="300"
-            [data]="lineChartData"
-            [options]="lineChartOptions"
-            [type]="lineChartType">
-        </canvas>
+        <ng-container *ngIf="playerDetails">
+            <div class="list-of-matches_text">
+                <span id="matchs">{{playerDetails.name}}</span>
+            </div>
+            <div class="performance-medium">
+                <span class="performance-span" id="goles-medium">Goles : {{countGoals(playerDetails)}}</span>
+                <span class="performance-span">Media : {{makeMedium(playerDetails.medium)}}</span>
+                <span class="performance-span">Delantero : {{makeMedium(playerDetails.shooter)}}</span>
+                <span class="performance-span">Centro : {{makeMedium(playerDetails.center)}}</span>
+                <span class="performance-span">Defensa : {{makeMedium(playerDetails.defense)}}</span>
+                <div class="horizontal-divider"></div>
+                <div class="horizontal-divider"></div>
+            </div>
+            <div class="list-of-matches">
+                <div class="list-of-matches_text">
+                    <span id="matchs">Partidos</span>
+                </div>
+                <ion-slides [options]="teamsSlidesOptions" class="slide">
+                    <ion-slide *ngFor="let match of playerDetails.matches">
+                        <ng-container *ngIf="match != '' ">
+                            <ion-chip class="data-display__chip">
+                                <ion-label>{{match}}</ion-label>
+                            </ion-chip>
+                        </ng-container>
+                    </ion-slide>
+                </ion-slides>
+            </div>
+            <div class="horizontal-divider"></div>
+                <ion-segment (ionChange)="segmentChanged($event)" scrolleable value="media" mode="ios" >
+                    <ion-segment-button value="Media">
+                        <ion-icon name="star-outline"></ion-icon>
+                    </ion-segment-button>
+                    <ion-segment-button value="Delantero">
+                        <div class="icon-flex">
+                            <ion-icon class="icon-in-flex" name="caret-back-outline"></ion-icon>
+                            <ion-icon class="icon-in-flex"name="man-outline"></ion-icon>
+                        </div>
+                    </ion-segment-button>
+                    <ion-segment-button value="Centro">
+                        <div class="icon-flex">
+                            <ion-icon class="icon-in-flex" name="caret-forward-outline"></ion-icon>
+                            <ion-icon class="icon-in-flex" name="man-outline"></ion-icon>
+                            <ion-icon class="icon-in-flex" name="caret-back-outline"></ion-icon>
+                        </div>
+                    </ion-segment-button>
+                    <ion-segment-button value="Defensa">
+                        <div class="icon-flex">
+                            <ion-icon class="icon-in-flex"name="man-outline"></ion-icon>
+                            <ion-icon class="icon-in-flex" name="caret-forward-outline"></ion-icon>
+                        </div>
+                    </ion-segment-button>
+                </ion-segment>
+            <canvas baseChart width="400" height="300"
+                [data]="lineChartData"
+                [options]="lineChartOptions"
+                [type]="lineChartType">
+            </canvas>
+        </ng-container>
     </div>
 </div>
