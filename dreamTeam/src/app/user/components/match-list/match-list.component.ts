@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Match } from 'src/app/model/match';
+import { Participation } from 'src/app/model/participation';
 import { Player } from 'src/app/model/player';
 import { LeagueService } from 'src/app/service/league/league.service';
 import { MatchsService } from 'src/app/service/matchs/matchs.service';
@@ -23,11 +24,19 @@ export class MatchListComponent implements OnInit {
 
 teamsSlidesOptions = {
   freeMode : true,
-  slidesPerView: 3.5,
+  slidesPerView: 2.5,
   spaceBetween: 10
 }
   players: Player[]
   matches: Match[]
+  seeMatch: Match
+
+  team1: string[] = []
+  team2: string[] = []
+
+  participations: Participation[] = []
+
+
   constructor(private leagueService: LeagueService, private playerService: PlayerService, public matchService: MatchsService) { }
 
 
@@ -50,5 +59,31 @@ teamsSlidesOptions = {
 
   test(){
     console.log("hola")
+  }
+
+  seeDetails(match){
+    match.team1.forEach(id => {
+      console.log(id)
+      var namePlayer = ""
+      this.players.forEach(player => {
+        if(player.id == id ){
+          namePlayer = player.name
+          this.participations.push({id: id, name: namePlayer, shooter: 0, defense: 0, center: 0, goal: 0})
+        }
+      })
+      this.team1.push(namePlayer)
+      console.log(this.team1)
+    })
+    match.team2.forEach(id => {
+      var namePlayer = ""
+      this.players.forEach(player => {
+        if(player.id == id ){
+          namePlayer = player.name
+          this.participations.push({id: id, name: namePlayer, shooter: 0, defense: 0, center: 0, goal: 0})
+        }
+      })
+      this.team2.push(namePlayer)
+    })
+    this.seeMatch = match
   }
 }

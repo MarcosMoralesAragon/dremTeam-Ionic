@@ -11,13 +11,19 @@
     margin-top: 25px;
 }
 
-#last-match{
+#card-top{
     display: grid;
-    margin-bottom: 9px;
-    grid-template-columns: 1fr 0.6fr;
-    grid-template-rows: repeat(4, 1fr);
-    justify-content: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.data-display{
+    margin: 2px;
     align-items: center;
+}
+
+#mvp{
+    font-size: 0.8rem;
 }
 
 .card{
@@ -31,35 +37,7 @@
 span{
     font-size: 0.9rem;
 }
-#mvp{
-    grid-column: 1;
-    grid-row: 1;
-}
-#delantero{
-    grid-column: 1;
-    grid-row: 2;
-}
-#defensa{
-    grid-column: 1;
-    grid-row: 3;
-}
-#centro{
-    grid-column: 1;
-    grid-row: 4;
-}
-#resultado{
-    grid-column: 2;
-    grid-row: 2/4;
-    font-size: 1.5rem;
-    text-align: center;
-}
-#button{
-    grid-column: 2;
-    grid-row: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 .button-text{
     height: 20px;
 }

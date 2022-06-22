@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { element } from 'protractor';
 import { Player } from 'src/app/model/player';
 import { LeagueService } from 'src/app/service/league/league.service';
 import { PlayerService } from 'src/app/service/player/player.service';
@@ -26,6 +27,9 @@ export class StatisticsComponent implements OnInit{
   }
 
   playerDetails: Player
+
+  playerData: number[] = []
+  playerMatchs = []
   
   testData = [
     "",
@@ -51,22 +55,44 @@ export class StatisticsComponent implements OnInit{
   }
 
   seePLayer(player: Player){
+    console.log(this.players)
+    this.playerData = []
     this.playerDetails = player
-    this.lineChartData.datasets[0].data = player.medium
-    this.lineChartData.labels = player.matches
+    this.playerData.push(this.countGoals(player.goals))
+    this.playerData.push(this.makeMedium(player.medium))
+    this.playerData.push(this.makeMedium(player.shooter))
+    this.playerData.push(this.makeMedium(player.center))
+    this.playerData.push(this.makeMedium(player.defense))
+    console.log(this.transformObjectIntoArray(player.medium))
+    this.lineChartData.datasets[0].data = this.transformObjectIntoArray(this.playerDetails.medium)
+    this.lineChartData.labels = this.transformObjectIntoArray(this.playerDetails.matches)
+    this.playerMatchs = this.transformObjectIntoArray(this.playerDetails.matches)
     this.chart?.update();
   }
 
-  countGoals(player: Player){
+  countGoals(goals: Object){
     var total = 0
-    player.goals!!.forEach(goal => total =+ goal)
+    for (let values of Object.values(goals)) {
+      total = total + values
+    }
     return total
   }
 
-  makeMedium(list: number[]){
+  makeMedium(object: Object){
     var total = 0
-    list.forEach(value => total =+ value)
-    return this.decimalAdjust('round', (total/list.length), -1)
+    for (let values of Object.values(object)) {
+      total = total + values
+    }
+    total = total / (Object.values(object).length)
+    return this.decimalAdjust('round', total, -1)
+  }
+
+  transformObjectIntoArray(object: Object){
+    var array = []
+    for (let values of Object.values(object)) {
+      array.push(values)
+    }
+    return array
   }
 
   segmentChanged(ev: any) {
@@ -74,19 +100,19 @@ export class StatisticsComponent implements OnInit{
     this.lineChartData.datasets[0].label = ev.detail.value
     switch(ev.detail.value){
       case "Media":
-        this.lineChartData.datasets[0].data = this.playerDetails.medium
+        this.lineChartData.datasets[0].data = this.transformObjectIntoArray(this.playerDetails.medium) 
         break;
 
       case "Delantero":
-        this.lineChartData.datasets[0].data = this.playerDetails.shooter
+        this.lineChartData.datasets[0].data = this.transformObjectIntoArray(this.playerDetails.shooter) 
         break;
       
       case "Centro":
-        this.lineChartData.datasets[0].data = this.playerDetails.center
+        this.lineChartData.datasets[0].data = this.transformObjectIntoArray(this.playerDetails.center) 
         break;
       
       case "Defensa":
-        this.lineChartData.datasets[0].data = this.playerDetails.defense
+        this.lineChartData.datasets[0].data = this.transformObjectIntoArray(this.playerDetails.defense) 
         break;
     }
     this.chart?.update();
@@ -96,7 +122,7 @@ export class StatisticsComponent implements OnInit{
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
-        data: [ 0 ],
+        data: [],
         label: 'Media',
         backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
@@ -107,7 +133,7 @@ export class StatisticsComponent implements OnInit{
         fill: 'origin',
       }
     ],
-    labels: [ "" ]
+    labels: []
   };
 
   public lineChartOptions: ChartConfiguration['options'] = {

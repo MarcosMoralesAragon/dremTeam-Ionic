@@ -1,4 +1,3 @@
-import { Participation } from "./participation";
 import { PlayerCuted } from "./playerCuted";
 
 export interface Match {

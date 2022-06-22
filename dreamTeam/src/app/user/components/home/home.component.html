@@ -1,29 +1,31 @@
 <div class="container">
   <div class="header">
     <ion-icon class="icon" name="arrow-undo-outline" (click)="navigateBack()"></ion-icon>
-    <h4 class="ion-text-center">Liga LigaName</h4>
+    <h4 class="ion-text-center">Liga {{leagueService.leagueIn.name}}</h4>
   </div>
   <ion-card class="resume">
     <ion-card-header>
       <ion-card-title class="ion-text-center">Ultimo partido</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <div class="card">
-        <span id="mvp">MVP : Pepe (9.2)</span>
-        <span id="defensa">Defensa ★ : Pepe (8)</span>
-        <span id="delantero">Delantero ★ : Pepe (7)</span>
-        <span id="centro">Centro ★ : Pepe (8)</span>
-        <span id="resultado">0 - 0</span>
-        <span id="code">M-AAABBBCC</span>
-        <div id="button">
-          <ion-button class="button-text" mode="ios">
-            Go
-          </ion-button>
+      <ng-container *ngIf="lastMatchComplete">
+        <div class="card">
+          <span class="data-display" id="mvp">MVP : {{lastMatchComplete.mvp}}</span>
+          <span class="data-display">Defensa ★ : {{lastMatchComplete.defense}}</span>
+          <span class="data-display">Delantero ★ : {{lastMatchComplete.shooter}}</span>
+          <span class="data-display">Centro ★ : {{lastMatchComplete.center}}</span>
+          <span class="data-display">Resultado : {{lastMatchComplete.result}}</span>
+          <span class="data-display">Codigo: {{lastMatchComplete.id}}</span>
+          <div id="button">
+            <!-- <ion-button class="button-text" mode="ios">
+              Go
+            </ion-button> -->
+          </div>
         </div>
-      </div>
+      </ng-container>
     </ion-card-content>
   </ion-card>
-  <ion-card class="league-state">
+  <!-- <ion-card class="league-state">
     <ion-card-header>
       <ion-card-title class="ion-text-center">Estado actual de la liga</ion-card-title>
     </ion-card-header>
@@ -71,5 +73,5 @@
         </ion-slide>
       </ion-slides>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </div>

@@ -24,11 +24,11 @@
                 <span id="matchs">{{playerDetails.name}}</span>
             </div>
             <div class="performance-medium">
-                <span class="performance-span" id="goles-medium">Goles : {{countGoals(playerDetails)}}</span>
-                <span class="performance-span">Media : {{makeMedium(playerDetails.medium)}}</span>
-                <span class="performance-span">Delantero : {{makeMedium(playerDetails.shooter)}}</span>
-                <span class="performance-span">Centro : {{makeMedium(playerDetails.center)}}</span>
-                <span class="performance-span">Defensa : {{makeMedium(playerDetails.defense)}}</span>
+                <span class="performance-span" id="goles-medium">Goles : {{playerData[0]}}</span>
+                <span class="performance-span">Media : {{playerData[1]}}</span>
+                <span class="performance-span">Delantero : {{playerData[2]}}</span>
+                <span class="performance-span">Centro : {{playerData[3]}}</span>
+                <span class="performance-span">Defensa : {{playerData[4]}}</span>
                 <div class="horizontal-divider"></div>
                 <div class="horizontal-divider"></div>
             </div>
@@ -37,7 +37,7 @@
                     <span id="matchs">Partidos</span>
                 </div>
                 <ion-slides [options]="teamsSlidesOptions" class="slide">
-                    <ion-slide *ngFor="let match of playerDetails.matches">
+                    <ion-slide *ngFor="let match of playerMatchs">
                         <ng-container *ngIf="match != '' ">
                             <ion-chip class="data-display__chip">
                                 <ion-label>{{match}}</ion-label>
