@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="header">
+    <ion-icon class="icon" name="arrow-undo-outline" (click)="navigateBack()"></ion-icon>
+    <h4 class="ion-text-center">Liga {{leagueService.leagueIn.name}}</h4>
+  </div>
+  <ion-card class="resume">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Ultimo partido</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngIf="lastMatchComplete">
+        <div class="card">
+          <span class="data-display" id="mvp">MVP : {{lastMatchComplete.mvp}}</span>
+          <span class="data-display">Defensa ★ : {{lastMatchComplete.defense}}</span>
+          <span class="data-display">Delantero ★ : {{lastMatchComplete.shooter}}</span>
+          <span class="data-display">Centro ★ : {{lastMatchComplete.center}}</span>
+          <span class="data-display">Resultado : {{lastMatchComplete.result}}</span>
+          <span class="data-display">Codigo: {{lastMatchComplete.id}}</span>
+          <div id="button">
+            <!-- <ion-button class="button-text" mode="ios">
+              Go
+            </ion-button> -->
+          </div>
+        </div>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+  <!-- <ion-card class="league-state">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Estado actual de la liga</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-slides mode="ios" [options]="leagueStateOptions">
+        <ion-slide>
+          <div class="league-state__data-display">
+            <span class="data-display__header">Mejores jugadores</span>
+            <ion-chip class="data-display__firstchip data-display__chip"><ion-label>Juan 9</ion-label></ion-chip>
+            <ion-chip class="data-display__secondchip data-display__chip"><ion-label>Alvaro 9</ion-label></ion-chip>
+            <ion-chip class="data-display__thirdchip data-display__chip"><ion-label>Pablo 7</ion-label></ion-chip>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="league-state__data-display">
+            <span class="data-display__header" id="delanteros-header">Mejores delanteros</span>
+            <ion-chip class="data-display__firstchip data-display__chip"><ion-label>Juan 9</ion-label></ion-chip>
+            <ion-chip class="data-display__secondchip data-display__chip"><ion-label>Alvaro 9</ion-label></ion-chip>
+            <ion-chip class="data-display__thirdchip data-display__chip"><ion-label>Pablo 7</ion-label></ion-chip>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="league-state__data-display">
+            <span class="data-display__header">Mejores defensas</span>
+            <ion-chip class="data-display__firstchip data-display__chip"><ion-label>Juan 9</ion-label></ion-chip>
+            <ion-chip class="data-display__secondchip data-display__chip"><ion-label>Alvaro 9</ion-label></ion-chip>
+            <ion-chip class="data-display__thirdchip data-display__chip"><ion-label>Pablo 7</ion-label></ion-chip>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="league-state__data-display">
+            <span class="data-display__header">Mejores centros</span>
+            <ion-chip class="data-display__firstchip data-display__chip"><ion-label>Juan 9</ion-label></ion-chip>
+            <ion-chip class="data-display__secondchip data-display__chip"><ion-label>Alvaro 9</ion-label></ion-chip>
+            <ion-chip class="data-display__thirdchip data-display__chip"><ion-label>Pablo 7</ion-label></ion-chip>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="league-state__data-display">
+            <span class="data-display__header">Mejores centros</span>
+            <ion-chip class="data-display__firstchip data-display__chip"><ion-label>Juan 9</ion-label></ion-chip>
+            <ion-chip class="data-display__secondchip data-display__chip"><ion-label>Alvaro 9</ion-label></ion-chip>
+            <ion-chip class="data-display__thirdchip data-display__chip"><ion-label>Pablo 7</ion-label></ion-chip>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card> -->
+</div>

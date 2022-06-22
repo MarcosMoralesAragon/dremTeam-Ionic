@@ -1,20 +1,51 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" mode="ios">
+  <div class="container">
+    <div class="text-welcome">
+      <h1>Dream Team</h1>
+    </div>
+    <div class="action">
+      <ion-card>
+        <ion-segment value="{{acction}}">
+          <ion-segment-button value="Log in" (click)="acctionDoing('Log in')">
+            <ion-label>Log in</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="Register" (click)="acctionDoing('Register')">
+            <ion-label>Register</ion-label>
+          </ion-segment-button>
+        </ion-segment>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <ng-container *ngIf="acction == 'Log in'">
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input type="Email" placeholder="example@gmail.com" [(ngModel)] = "userLogin.email" ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" placeholder="123456" [(ngModel)] = "userLogin.password" ></ion-input>
+          </ion-item>
+        </ng-container>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <ng-container *ngIf="acction == 'Register'">
+          <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-input type="text" placeholder="Messi" [(ngModel)] = "userRegister.name" ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input type="Email" placeholder="example@gmail.com" [(ngModel)] = "userRegister.email" ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" placeholder="123456" [(ngModel)] = "userRegister.password" ></ion-input>
+          </ion-item>
+        </ng-container>
+      </ion-card>
+      <div class="button-down">
+        <ion-button (click)="doAcction(acction)"  shape="round" class="button">
+          {{acction}}
+        </ion-button>
+      </div>
+      
+    </div>
   </div>
 </ion-content>
