@@ -18,7 +18,12 @@ export class HomeComponent implements OnInit {
   constructor(private router : Router, private leagueService : LeagueService) { }
 
   ngOnInit() {
-    this.leagueService.refreshLeagueIn(this.leagueService.leagueIn.id).subscribe((result: any) => this.leagueService.leagueIn = result)
+    console.log("Hola");
+    
+    this.leagueService.refreshLeagueIn(this.leagueService.leagueIn.id).subscribe((result: any) => {
+      this.leagueService.leagueIn = result
+      console.log(this.leagueService.leagueIn)
+    })
   }
 
   navigateBack(){

@@ -49,7 +49,10 @@ export class CreateComponent implements OnInit {
         this.router.navigateByUrl("/user/owner/components/statics")
     }
     if(this.whatToMake == "match"){
-      this.matchService.createMatch(this.playersInMatch).subscribe(result => console.log(result))
+      this.matchService.createMatch({playersInMatch: this.playersInMatch, leagueId: this.leagueService.leagueIn.id}).subscribe(result => {
+        this.matchService.setCurrentMatch(result)
+        this.router.navigateByUrl("/user/owner/components/match")
+      })
     }
   }
 }

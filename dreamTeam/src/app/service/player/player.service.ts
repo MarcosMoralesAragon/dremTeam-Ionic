@@ -15,7 +15,7 @@ export class PlayerService {
     return this.http.post(url + "/createPlayer", data)
   }
 
-  getPlayers(data){
+  getPlayers(data): Observable<any>{
     return this.http.post(url + '/getPlayers', {playersId : data})
   }
 }

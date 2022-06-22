@@ -1,2 +1,84 @@
 <div class="container">
+    <div class="card" id="game-card">
+        <ng-container *ngIf="match">
+            <ion-card-title class="ion-text-center black-text">Partido {{match.id}}</ion-card-title>
+            <div class="horizontal-divider"></div>
+            <ion-button (click)="seeMatch()" expand="block" mode="ios"  *ngIf="!watchMatch">
+                Ver partido
+            </ion-button>
+            <ng-container *ngIf="watchMatch">
+                <ion-slides [options]="teamsSlidesOptions" class="slide">
+                    <ng-container *ngIf="team1">
+                        <ion-slide *ngFor="let item of team1">
+                            <ion-chip class="data-display__chip">
+                                <ion-label>{{item}}</ion-label>
+                            </ion-chip>
+                        </ion-slide>
+                    </ng-container>
+                </ion-slides>
+                <div class="VS-game-card">
+                <div class="horizontal-divider"></div>
+                <div id="vs">
+                    <span >VS</span>
+                </div>
+                <div class="horizontal-divider"></div>
+                </div>
+                <ion-slides [options]="teamsSlidesOptions" class="slide">
+                    <ng-container *ngIf="team2">
+                        <ion-slide *ngFor="let item of team2">
+                            <ion-chip class="data-display__chip">
+                                <ion-label>{{item}}</ion-label>
+                            </ion-chip>
+                        </ion-slide>
+                    </ng-container>
+                </ion-slides>
+                <div class="horizontal-divider"></div>
+                <div class="grid-puntuar">
+                    <span></span>
+                    <span>
+                        <ion-icon class="icon-in-flex" name="caret-back-outline"></ion-icon>
+                        <ion-icon class="icon-in-flex"name="man-outline"></ion-icon>
+                    </span>
+                    <span>
+                        <ion-icon class="icon-in-flex" name="caret-forward-outline"></ion-icon>
+                        <ion-icon class="icon-in-flex" name="man-outline"></ion-icon>
+                        <ion-icon class="icon-in-flex" name="caret-back-outline"></ion-icon>
+                    </span>
+                    <span>
+                        <ion-icon class="icon-in-flex"name="man-outline"></ion-icon>
+                        <ion-icon class="icon-in-flex" name="caret-forward-outline"></ion-icon>
+                    </span>
+                    <span>
+                        <ion-icon name="football-outline"></ion-icon>
+                    </span>
+                    <ng-container *ngFor="let item of participations">
+                        <span>{{item.name}}</span>
+                        <ion-select placeholder="0" mode="ios" [(ngModel)]="item.shooter">
+                            <ng-container *ngFor="let number of numbers">
+                                <ion-select-option value="{{number}}">{{number}}</ion-select-option>
+                            </ng-container>
+                        </ion-select>
+                        <ion-select placeholder="0" mode="ios" [(ngModel)]="item.center">
+                            <ng-container *ngFor="let number of numbers">
+                                <ion-select-option value="{{number}}">{{number}}</ion-select-option>
+                            </ng-container>
+                        </ion-select>
+                        <ion-select placeholder="0" mode="ios" [(ngModel)]="item.defense">
+                            <ng-container *ngFor="let number of numbers">
+                                <ion-select-option value="{{number}}">{{number}}</ion-select-option>
+                            </ng-container>
+                        </ion-select>
+                        <ion-select placeholder="0" mode="ios" [(ngModel)]="item.goal">
+                            <ng-container *ngFor="let number of numbers">
+                                <ion-select-option value="{{number}}">{{number}}</ion-select-option>
+                            </ng-container>
+                        </ion-select>
+                    </ng-container>
+                </div>
+                <ion-button (click)="terminarPartido()" expand="block" mode="ios">
+                    Puntuar partido
+                </ion-button>
+            </ng-container>
+        </ng-container>
+    </div>
 </div>
