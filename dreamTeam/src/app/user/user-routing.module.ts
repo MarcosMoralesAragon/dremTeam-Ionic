@@ -7,7 +7,8 @@ const routes: Routes = [
   {
     path: '',
     component: UserPage
-  },  {
+  },
+  {
     path: 'owner',
     loadChildren: () => import('./owner/owner.module').then( m => m.OwnerPageModule)
   },
@@ -15,7 +16,6 @@ const routes: Routes = [
     path: 'espectator',
     loadChildren: () => import('./espectator/espectator.module').then( m => m.EspectatorPageModule)
   }
-
 ];
 
 @NgModule({

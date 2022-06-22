@@ -1,27 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { Firestore } from '@angular/fire/firestore';
-import { addDoc, collection } from 'firebase/firestore';
-import { Observable, from } from 'rxjs';
-import { User } from 'src/app/model/user';
+import { HttpClient } from "@angular/common/http"
+import { Observable, from, of } from 'rxjs';
+
+const url = "http://127.0.0.1:8000"
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogInRegisterService {
 
-  userIn : User = {
-    email: "paco@gmail.com",
-    ownLeaguesId : [
-      "AAABBB123","AAABBB124","AAABBB125","AAABBB126","AAABBB127","AAABBB128", "AAABBB129",
-    ],
-    espectatorLeaguesId : [
-      "AAABBB133","AAABBB134","AAABBB135","AAABBB136","AAABBB137","AAABBB138", "AAABBB139",
-    ]
-  }
   emailLogin : string
 
-  constructor(private autentication: Auth, private firestore: Firestore) { }
+  constructor(private autentication: Auth, private http: HttpClient) {}
 
   registerUser(data): Observable<boolean>{
     return from(createUserWithEmailAndPassword(this.autentication, data.email , data.password).then(result => {
@@ -33,16 +24,14 @@ export class LogInRegisterService {
     }))
   }
 
-  async addUserDatabase(data) {
+  addUserDatabase(data) : Observable<any> {
     var userData = {
       name : data.name,
       email : data.email
-    } 
-    try {
-        const docRef = await addDoc(collection(this.firestore, "userList"), userData);
-    } catch (e) {
-        console.error("Error adding document: ", e);
-    }    
+    }
+    console.log(userData);
+    
+    return this.http.post(url + '/registerUser', userData)  
 }
 
   logInUser(data): Observable<boolean>{
@@ -56,19 +45,7 @@ export class LogInRegisterService {
     }))
   }
 
-  setUserData(){
-    this.userIn = {
-      email: this.emailLogin,
-      ownLeaguesId : [
-        "AAABBB123","AAABBB124","AAABBB125","AAABBB126","AAABBB127","AAABBB128", "AAABBB129",
-      ],
-      espectatorLeaguesId : [
-        "AAABBB133","AAABBB134","AAABBB135","AAABBB136","AAABBB137","AAABBB138", "AAABBB139",
-      ]
-    }
-  }
-
-  getUserData(){
-    return this.userIn
+  getUserData(): Observable<any>{
+    return this.http.post(`${url}/get`, {email : this.emailLogin})
   }
 }

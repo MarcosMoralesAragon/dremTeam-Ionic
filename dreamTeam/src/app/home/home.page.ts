@@ -36,20 +36,20 @@ export class HomePage {
           return ;
         }
           this.acction = "Log in"
+          this.loginRegisterService.addUserDatabase(this.userRegister).subscribe((result) => {
+
+          }, (error: any) => console.log(error))
       })
-      this.loginRegisterService.addUserDatabase(this.userRegister)
     } else if(request == "Log in") {
       if(!this.checkData(this.userLogin, this.acction)){
         return ;
       }
-      this.loginRegisterService.logInUser(this.userLogin).subscribe(value => {
-        console.log(value)
-        this.loginRegisterService.setUserData()
-        this.router.navigateByUrl('user')
+      this.loginRegisterService.logInUser(this.userLogin).subscribe(value => {        
         if(!value){
           console.log("Algo salio mal")
           return ;
         }
+        this.router.navigateByUrl('user')
       })
     }
   }

@@ -1,5 +1,7 @@
 export interface User{
+    id: string,
     email: string,
-    ownLeaguesId: string[],
-    espectatorLeaguesId: string[]
+    name: string,
+    ownLeaguesId?: string[],
+    spectatorLeaguesId?: string[]
 }

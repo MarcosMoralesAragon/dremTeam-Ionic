@@ -1,53 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { League } from 'src/app/model/league';
 import { LogInRegisterService } from '../auth/log-in-register.service';
+
+const url = "http://127.0.0.1:8000"
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeagueService {
 
-  constructor(private authService : LogInRegisterService) { }
+  leagueIn : League
 
-  getLeagues(wichList:any) : Observable<any>{
-    var user = this.authService.getUserData()
-    var arrayResult = []
+  constructor(private http: HttpClient) { }
 
-    var list = user.ownLeaguesId
-    if(wichList == "espectatingLeagues"){
-      var list = user.espectatorLeaguesId
-    }
-
-    list.forEach(ownId => {
-      leagues.forEach(league => {
-        if(ownId == league.id){
-          arrayResult.push(league)
-        }
-      })
-    })
-    return of(arrayResult)
+  createLeague(data){
+    return this.http.post(url + "/createLeague", data)
   }
 
-  addLeague(list:string){}
+  spectateLeague(data){
+    return this.http.post(url + "/spectateLeague", data)
+  }
 
+  getLeagues(data){
+    return this.http.post(url + "/getLeagues", {ownLeaguesId: data.ownLeaguesId, espectatorLeaguesId: data.spectatorLeaguesId})
+  }
+
+  refreshLeagueIn(data){
+    return this.http.post(url + "/getLeague", {id : data})
+  }
 
 }
-
-
-const leagues : League[] = [
-  {name: "Liga 1", id: "AAABBB123", ownerEmail:"paco@gmail.com"},
-  {name: "Liga 2", id: "AAABBB124", ownerEmail:"paco@gmail.com"},
-  {name: "Liga 3", id: "AAABBB125", ownerEmail:"paco@gmail.com"},
-  {name: "Liga 4", id: "AAABBB126", ownerEmail:"paco@gmail.com"},
-  {name: "Liga 5", id: "AAABBB127", ownerEmail:"paco@gmail.com"},
-  {name: "Liga 6", id: "AAABBB128", ownerEmail:"paco@gmail.com"},
-  {name: "Liga 7", id: "AAABBB129", ownerEmail:"paco@gmail.com"},
-  {name: "Liga 8", id: "AAABBB133", ownerEmail:"test@gmail.com"},
-  {name: "Liga 9", id: "AAABBB134", ownerEmail:"test@gmail.com"},
-  {name: "Liga 10", id: "AAABBB135", ownerEmail:"test@gmail.com"},
-  {name: "Liga 11", id: "AAABBB136", ownerEmail:"test@gmail.com"},
-  {name: "Liga 12", id: "AAABBB137", ownerEmail:"test@gmail.com"},
-  {name: "Liga 13", id: "AAABBB138", ownerEmail:"test@gmail.com"},
-  {name: "Liga 14", id: "AAABBB139", ownerEmail:"test@gmail.com"},
-]

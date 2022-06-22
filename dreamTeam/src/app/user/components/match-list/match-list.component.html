@@ -1,0 +1,62 @@
+<div class="container">
+  <ion-card class="resume">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Ultimos partidos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngIf="matches">
+        <ion-slides mode="ios" scrollbar="ios">
+          <ion-slide *ngFor="let match of matches">
+            <div class="card" id="card-top">
+              <span class="data-display" id="mvp">MVP : {{match.mvp}}</span>
+              <span class="data-display">Defensa ★ : {{match.defense}}</span>
+              <span class="data-display">Delantero ★ : {{match.shooter}}</span>
+              <span class="data-display">Centro ★ : {{match.center}}</span>
+              <span class="data-display">Resultado : {{match.result}}</span>
+              <span class="data-display">Codigo: {{match.id}}</span>
+              <div id="button">
+                <ion-button (click)="seeDetails(match)" class="button-text" mode="ios">
+                  Go
+                </ion-button>
+              </div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+  <!-- <div class="card-search">
+    <div class="match-searcher">
+      <ion-label class="input-search-label" id="first-label">M-</ion-label>
+      <ion-input class="input-search" placeholder="Codigo de la liga"></ion-input>
+      <ion-label class="input-search-label" id="second-label"><ion-icon name="search"></ion-icon></ion-label>
+    </div>
+  </div> -->
+  <ng-container *ngIf="seeMatch">
+    <div class="card" id="game-card">
+      <ion-card-title class="ion-text-center black-text" style="font-size: 1rem;">Partido {{seeMatch.id}}</ion-card-title>
+      <div class="horizontal-divider"></div>
+      <ion-slides [options]="teamsSlidesOptions" class="slide">
+          <ion-slide *ngFor="let item of team1">
+            <ion-chip class="data-display__chip">
+              <ion-label>{{item}}</ion-label>
+            </ion-chip>
+          </ion-slide>
+      </ion-slides>
+      <div class="VS-game-card">
+        <div class="horizontal-divider"></div>
+        <div id="vs">
+          <span >VS</span>
+        </div>
+        <div class="horizontal-divider"></div>
+      </div>
+      <ion-slides [options]="teamsSlidesOptions" class="slide">
+        <ion-slide *ngFor="let item of team2">
+          <ion-chip class="data-display__chip">
+            <ion-label>{{item}}</ion-label>
+          </ion-chip>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </ng-container>
+</div>
